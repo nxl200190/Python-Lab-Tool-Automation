@@ -9,6 +9,48 @@ import time
 
 
 
+IMAGE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "images")
+
+ANALYSIS_PROG     = os.path.join(IMAGE_DIR, 'analysis_prog.png')
+ANALYZE           = os.path.join(IMAGE_DIR, 'analyze.png')
+BLANK_SCREEN      = os.path.join(IMAGE_DIR, 'blank_screen.png')
+CLOSE             = os.path.join(IMAGE_DIR, 'close.png')
+EXPORT_BUTTON     = os.path.join(IMAGE_DIR, 'export_button.png')
+IMPORT            = os.path.join(IMAGE_DIR, 'import.png')
+LOAD_EXPORT_SET   = os.path.join(IMAGE_DIR, 'load_export_set.png')
+RESULTS_TAB       = os.path.join(IMAGE_DIR, 'results_tab.png')
+SELECTED_RESULT   = os.path.join(IMAGE_DIR, 'selected_result.png')
+SETUP             = os.path.join(IMAGE_DIR, 'setup.png')
+
+CORE_IMAGES = [
+    ANALYSIS_PROG,
+    ANALYZE,
+    BLANK_SCREEN,
+    CLOSE,
+    EXPORT_BUTTON,
+    IMPORT,
+    LOAD_EXPORT_SET,
+    RESULTS_TAB,
+    SELECTED_RESULT,
+    SETUP,
+]
+
+def test_required_images():
+    one_or_more_missing=False
+    for image_path in CORE_IMAGES:
+        if not os.path.isfile(image_path):
+            one_or_more_missing=True
+        else:
+            print(f"Found {image_path}")
+        
+    return not one_or_more_missing
+
+all_images_found = test_required_images()
+if not all_images_found:
+    print("Missing one or more core images in the ./images directory.")
+    raise
+
+
 def get_folders_in_directory(directory):
     folder_directories = []
 
@@ -100,8 +142,8 @@ def gene_expression_export():
         folders = get_folders_in_directory(WOs)
         for export_path in folders:
             open_file_by_directory(export_path)
-            png_match_task(os.path.join(script_dir, 'Export Button.PNG'), 2)
-            png_match_task(os.path.join(script_dir, 'Load Export Set.png'), 2)
+            png_match_task(os.path.join(script_dir, EXPORT_BUTTON), 2)
+            png_match_task(os.path.join(script_dir, LOAD_EXPORT_SET), 2)
             advance_with_tab(1)
             py.press('enter', interval=0.5)
             py.press('enter', interval=0.5)
@@ -109,19 +151,19 @@ def gene_expression_export():
             py.typewrite(export_path, interval=0)
             advance_with_tab(2)
             py.typewrite(export_path[-12:-7], interval=0)
-            png_match_task(os.path.join(script_dir, 'Results Tab.PNG'), 1.08)
-            png_match_task(os.path.join(script_dir, 'Selected Result.PNG'), 1.08)
+            png_match_task(os.path.join(script_dir, RESULTS_TAB), 1.08)
+            png_match_task(os.path.join(script_dir, SELECTED_RESULT), 1.08)
             advance_with_tab(1)
             py.press('space', interval=0.5)
             advance_with_tab(1)
             py.press('space', interval=0.5)
-            png_match_task(os.path.join(script_dir, 'Load Export Set.png'), 10)
+            png_match_task(os.path.join(script_dir, LOAD_EXPORT_SET), 10)
             py.move(-100, 0)
-            png_match_task(os.path.join(script_dir, 'Load Export Set.png'), 1.1)
+            png_match_task(os.path.join(script_dir, LOAD_EXPORT_SET), 1.1)
             py.press('enter', interval=0.5)
-            png_match_task(os.path.join(script_dir, 'Close.PNG'), 1.9)
+            png_match_task(os.path.join(script_dir, CLOSE), 1.9)
             py.press('enter', interval=0.5)
-            png_match_task(os.path.join(script_dir, 'Blank Screen.PNG'), 1)
+            png_match_task(os.path.join(script_dir, BLANK_SCREEN), 1)
 
 
 def start_gene_expression():
@@ -138,29 +180,29 @@ def ceph_genotyping():
         folders = get_folders_in_directory(WOs)
         for export_path in folders:
             open_file_by_directory(export_path)
-            png_match_task(os.path.join(script_dir, 'Export Button.PNG'), 2)
+            png_match_task(os.path.join(script_dir, EXPORT_BUTTON), 2)
             advance_with_tab(11)
             py.typewrite(export_path, interval=0)
-            png_match_task(os.path.join(script_dir, 'Load Export Set.png'), 1.1)
+            png_match_task(os.path.join(script_dir, LOAD_EXPORT_SET), 1.1)
             py.press('enter', interval=0.5)
             py.move(200, 0)
-            png_match_task(os.path.join(script_dir, 'Load Export Set.png'), 1.1)
+            png_match_task(os.path.join(script_dir, LOAD_EXPORT_SET), 1.1)
             py.press('enter', interval=0.5)
-            png_match_task(os.path.join(script_dir, 'Setup.PNG'), 2)
+            png_match_task(os.path.join(script_dir, SETUP), 2)
             py.move(0, 150)
             py.click()
-            png_match_task(os.path.join(script_dir, 'Import.PNG'), 2)
+            png_match_task(os.path.join(script_dir, IMPORT), 2)
             advance_with_tab(13)
             advance_with_down(11)
             py.press('enter', interval=1)
             py.press('enter', interval=1)
             py.move(-130, 350)
             py.click()
-            png_match_task(os.path.join(script_dir, 'Analyze.PNG'), 1.9)
-            check_state(os.path.join(script_dir, 'AnalysisProg.PNG'))
-            png_match_task(os.path.join(script_dir, 'Close.PNG'), 1.9)
+            png_match_task(os.path.join(script_dir, ANALYZE), 1.9)
+            check_state(os.path.join(script_dir, ANALYSIS_PROG))
+            png_match_task(os.path.join(script_dir, CLOSE), 1.9)
             py.press('enter', interval=1)
-            png_match_task(os.path.join(script_dir, 'Blank Screen.PNG'), 1)
+            png_match_task(os.path.join(script_dir, BLANK_SCREEN), 1)
 
 
 def start_ceph_genotyping():
@@ -177,29 +219,29 @@ def cf1_genotyping():
         folders = get_folders_in_directory(WOs)
         for export_path in folders:
             open_file_by_directory(export_path)
-            png_match_task(os.path.join(script_dir, 'Export Button.PNG'), 2)
+            png_match_task(os.path.join(script_dir, EXPORT_BUTTON), 2)
             advance_with_tab(11)
             py.typewrite(export_path, interval=0)
-            png_match_task(os.path.join(script_dir, 'Load Export Set.png'), 1.1)
+            png_match_task(os.path.join(script_dir, LOAD_EXPORT_SET), 1.1)
             py.press('enter', interval=0.5)
             py.move(200, 0)
-            png_match_task(os.path.join(script_dir, 'Load Export Set.png'), 1.1)
+            png_match_task(os.path.join(script_dir, LOAD_EXPORT_SET), 1.1)
             py.press('enter', interval=0.5)
-            png_match_task(os.path.join(script_dir, 'Setup.PNG'), 2)
+            png_match_task(os.path.join(script_dir, SETUP), 2)
             py.move(0, 150)
             py.click()
-            png_match_task(os.path.join(script_dir, 'Import.PNG'), 2)
+            png_match_task(os.path.join(script_dir, IMPORT), 2)
             advance_with_tab(13)
             advance_with_down(10)
             py.press('enter', interval=1)
             py.press('enter', interval=1)
             py.move(-130, 350)
             py.click()
-            png_match_task(os.path.join(script_dir, 'Analyze.PNG'), 1.9)
-            check_state(os.path.join(script_dir, 'AnalysisProg.PNG'))
-            png_match_task(os.path.join(script_dir, 'Close.PNG'), 1.9)
+            png_match_task(os.path.join(script_dir, ANALYZE), 1.9)
+            check_state(os.path.join(script_dir, ANALYSIS_PROG))
+            png_match_task(os.path.join(script_dir, CLOSE), 1.9)
             py.press('enter', interval=1)
-            png_match_task(os.path.join(script_dir, 'Blank Screen.PNG'), 1)
+            png_match_task(os.path.join(script_dir, BLANK_SCREEN), 1)
 
 
 def start_cf1_genotyping():
@@ -216,64 +258,64 @@ def cf2_genotyping():
         folders = get_folders_in_directory(WOs)
         for export_path in folders:
             open_file_by_directory(export_path)
-            png_match_task(os.path.join(script_dir, 'Export Button.PNG'), 2)
+            png_match_task(os.path.join(script_dir, EXPORT_BUTTON), 2)
             advance_with_tab(11)
             py.typewrite(export_path, interval=0)
-            png_match_task(os.path.join(script_dir, 'Load Export Set.png'), 1.1)
+            png_match_task(os.path.join(script_dir, LOAD_EXPORT_SET), 1.1)
             py.press('enter', interval=0.5)
             py.move(200, 0)
-            png_match_task(os.path.join(script_dir, 'Load Export Set.png'), 1.1)
+            png_match_task(os.path.join(script_dir, LOAD_EXPORT_SET), 1.1)
             py.press('enter', interval=0.5)
-            png_match_task(os.path.join(script_dir, 'Setup.PNG'), 2)
+            png_match_task(os.path.join(script_dir, SETUP), 2)
             py.move(0, 150)
             py.click()
-            png_match_task(os.path.join(script_dir, 'Import.PNG'), 2)
+            png_match_task(os.path.join(script_dir, IMPORT), 2)
             advance_with_tab(13)
             advance_with_down(9)
             py.press('enter', interval=1)
             py.press('enter', interval=1)
             py.move(-130, 350)
             py.click()
-            png_match_task(os.path.join(script_dir, 'Analyze.PNG'), 1.9)
-            check_state(os.path.join(script_dir, 'AnalysisProg.PNG'))
-            png_match_task(os.path.join(script_dir, 'Close.PNG'), 1.9)
+            png_match_task(os.path.join(script_dir, ANALYZE), 1.9)
+            check_state(os.path.join(script_dir, ANALYSIS_PROG))
+            png_match_task(os.path.join(script_dir, CLOSE), 1.9)
             py.press('enter', interval=1)
-            png_match_task(os.path.join(script_dir, 'Blank Screen.PNG'), 1)
+            png_match_task(os.path.join(script_dir, BLANK_SCREEN), 1)
 
 
 def start_cf2_genotyping():
     threading.Thread(target=cf2_genotyping).start()
     window.destroy()
 
+if all_images_found:
+    window = Tk()
+    window.title("Export Tool")
+    window.configure(bg="black")
 
-window = Tk()
-window.title("Export Tool")
-window.configure(bg="black")
+    window.geometry("1000x800")
 
-window.geometry("1000x800")
+    image = Image.open("//Ple01file01/Open_Array/Quality_Control/01_QC\ Personnel/Nathan/My\ Projects/Export\ Imager/Data.gif")
 
-image = Image.open("//Ple01file01/Open_Array/Quality_Control/01_QC Personnel/Nathan/My Projects/Export Imager/Data.gif")
+    new_size = (1050, 850)
+    image_resized = image.resize(new_size)
 
-new_size = (1050, 850)
-image_resized = image.resize(new_size)
+    photo_resized = ImageTk.PhotoImage(image_resized)
 
-photo_resized = ImageTk.PhotoImage(image_resized)
+    label = Label(window, image=photo_resized, bg="white")  # Change background color to white
+    label.grid(row=0, column=0)
 
-label = Label(window, image=photo_resized, bg="white")  # Change background color to white
-label.grid(row=0, column=0)
+    button_style = {"font": ("Helvetica", 14, "bold"), "bg": "lightblue", "fg": "black", "padx": 5, "pady": 5, "width": 20,
+                    "height": 5}
+    button1 = Button(window, text="Gene Expression", command=start_gene_expression, **button_style)
+    button1.place(x=100, y=200)
 
-button_style = {"font": ("Helvetica", 14, "bold"), "bg": "lightblue", "fg": "black", "padx": 5, "pady": 5, "width": 20,
-                "height": 5}
-button1 = Button(window, text="Gene Expression", command=start_gene_expression, **button_style)
-button1.place(x=100, y=200)
+    button2 = Button(window, text="CEPH", command=start_ceph_genotyping, **button_style)
+    button2.place(x=650, y=200)
 
-button2 = Button(window, text="CEPH", command=start_ceph_genotyping, **button_style)
-button2.place(x=650, y=200)
+    button3 = Button(window, text="CF1 (non-192 Format)", command=start_cf1_genotyping, **button_style)
+    button3.place(x=100, y=600)
 
-button3 = Button(window, text="CF1 (non-192 Format)", command=start_cf1_genotyping, **button_style)
-button3.place(x=100, y=600)
+    button3 = Button(window, text="CF2 (192 Format)", command=start_cf2_genotyping, **button_style)
+    button3.place(x=650, y=600)
 
-button3 = Button(window, text="CF2 (192 Format)", command=start_cf2_genotyping, **button_style)
-button3.place(x=650, y=600)
-
-window.mainloop()
+    window.mainloop()
