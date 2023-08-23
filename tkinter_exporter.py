@@ -8,8 +8,8 @@ import threading
 import time
 
 
-
-IMAGE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "images")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+IMAGE_DIR = os.path.join(SCRIPT_DIR, "images")
 
 ANALYSIS_PROG     = os.path.join(IMAGE_DIR, 'analysis_prog.png')
 ANALYZE           = os.path.join(IMAGE_DIR, 'analyze.png')
@@ -137,7 +137,7 @@ def gene_expression_export():
     location = "temp"
     folder_path = r'C:\Users\openarray\Desktop\Images' + '\\' + location
     woList = get_folders_in_directory(folder_path)
-    script_dir = os.path.dirname(os.path.abspath(__file__))
+    script_dir = SCRIPT_DIR
     for WOs in woList:
         folders = get_folders_in_directory(WOs)
         for export_path in folders:
@@ -175,7 +175,7 @@ def ceph_genotyping():
     location = "temp"
     folder_path = r'C:\Users\openarray\Desktop\Images' + '\\' + location
     woList = get_folders_in_directory(folder_path)
-    script_dir = os.path.dirname(os.path.abspath(__file__))
+    script_dir = SCRIPT_DIR
     for WOs in woList:
         folders = get_folders_in_directory(WOs)
         for export_path in folders:
@@ -214,7 +214,7 @@ def cf1_genotyping():
     location = "temp"
     folder_path = r'C:\Users\openarray\Desktop\Images' + '\\' + location
     woList = get_folders_in_directory(folder_path)
-    script_dir = os.path.dirname(os.path.abspath(__file__))
+    script_dir = SCRIPT_DIR
     for WOs in woList:
         folders = get_folders_in_directory(WOs)
         for export_path in folders:
@@ -253,7 +253,7 @@ def cf2_genotyping():
     location = "temp"
     folder_path = r'C:\Users\openarray\Desktop\Images' + '\\' + location
     woList = get_folders_in_directory(folder_path)
-    script_dir = os.path.dirname(os.path.abspath(__file__))
+    script_dir = SCRIPT_DIR
     for WOs in woList:
         folders = get_folders_in_directory(WOs)
         for export_path in folders:
